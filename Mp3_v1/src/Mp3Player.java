@@ -24,6 +24,22 @@ public class Mp3Player {
     public int getNumberOfSongs(){
         return songs.size();
     }
+    public int getNumberOfSongsLongerThan( Time length){
+        int count = 0;
+        for (Song x: songs) {
+            count = x.getLength().getTimeInSecond() > length.getTimeInSecond() ? count +1 : count;
+        }
+        return count;
+    }
+    public Song[] getSongsLongerThan(Time length){
+        ArrayList<Song> songsLongerThan = new ArrayList<>();
+        for ( Song x : songs) {
+            if(x.getLength().getTimeInSecond() > length.getTimeInSecond()){
+                songsLongerThan.add(x);
+            }
+        }
+        return songsLongerThan.toArray(new Song[getNumberOfSongsLongerThan(length)]);
+    }
 
     @Override
     public String toString() {
